@@ -62,59 +62,58 @@ const TAGS = {
 }
 const PROJECTS = [
   {
-    title: "Análisis tasa de abandono de clientes",
+    title: "Análisis de tasa de abandono de clientes",
     description:
-      "Datos proporcionados por Datacamp. Se evalúa la tasa de abandonos de los clientes de una empresa. Se analiza la razón de abandono, ubicación geográfica del cliente, edad, género y planes que contrató ",
+      "¿Por qué se van los clientes? Este análisis desglosa el churn por ubicación, edad, género y plan contratado para identificar los segmentos con mayor riesgo y los factores que lo explican.",
     image: "/projects/BI_CHURN.webp",
     dataset: "https://drive.google.com/drive/folders/1WuzyeDklXYDkunIapGo3EViuUaDGla3n?usp=sharing",
     link: "https://app.powerbi.com/view?r=eyJrIjoiNWMxYmZkZjctMTdmZi00NmViLWFjZTEtNmU4NjI4Zjc1NDExIiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
     tags: [TAGS.POWERBI, TAGS.POSTGRE, TAGS.EXCEL],
   },
-{
-    title: "Análisis de satisfacción de empleados en la empresa Atlas Labs",
+  {
+    title: "Análisis de satisfacción de empleados — Atlas Labs",
     description:
-      "Datos proporcionados por Datacamp. En este informe se puede ver un análisis hecho a los empleados de la empresa. En dicho informe se puede evaluar aspectos como la proporción entre salarios con edades y étnias, sentimiento por el trabajo y la empresa y el desgaste de los empleados.",
+      "¿Qué retiene al talento? Un análisis de RRHH que cruza salarios, diversidad, satisfacción laboral y desgaste para entender qué factores impactan la retención en una empresa de tecnología.",
     image: "/projects/BI_RRHH.webp",
     dataset: "https://drive.google.com/drive/folders/1lOqMWMxMCr7iXypOELSjb1P1oYtfv6X4?usp=sharing",
     link: "https://app.powerbi.com/view?r=eyJrIjoiNzQ2YmI3OTAtNDE4NS00ZDUxLTg1MzUtNGViNWI2Yjk0MTMxIiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
     tags: [TAGS.POWERBI, TAGS.POSTGRE, TAGS.EXCEL],
   },
   {
-    title: "Perspectivas del mercado laboral de la ciencia de datos",
+    title: "Perspectivas del mercado laboral en ciencia de datos",
     description:
-      "Datos proporcionados por Datacamp. Este análisis busca determinar la demanda de la ciencia de datos dentro del mercado laboral, así como las habilidades que la mayoría de las personas tienen al entrar a un campo como este. Se puede ver la experiencia y el puesto en el que se puede entrar o lo que se necesita para poder entrar, así como su sueldo y crecimiento dentro del mercado laboral.",
-      image: "/projects/BI_JOBS.webp",
-      dataset: "https://drive.google.com/drive/folders/1WoxQWfkLPk9wymdTMXjMUtxDLsTy3UXq?usp=sharing",
-      link: "https://app.powerbi.com/view?r=eyJrIjoiNGVkYmEwMWEtY2M0Mi00YWI1LWIxZmEtYzAxMjJmZmFmN2Q1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
+      "¿Vale la pena entrar al campo de datos? Este análisis mapea la demanda real de perfiles, los salarios según experiencia y rol, y las habilidades que el mercado exige para quien quiera entrar o crecer en ciencia de datos.",
+    image: "/projects/BI_JOBS.webp",
+    dataset: "https://drive.google.com/drive/folders/1WoxQWfkLPk9wymdTMXjMUtxDLsTy3UXq?usp=sharing",
+    link: "https://app.powerbi.com/view?r=eyJrIjoiNGVkYmEwMWEtY2M0Mi00YWI1LWIxZmEtYzAxMjJmZmFmN2Q1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
     tags: [TAGS.POWERBI, TAGS.MYSQL, TAGS.EXCEL],
   },
   {
-    title: "Análisis de polaridad de comentarios de un restaurant",
+    title: "Análisis de polaridad de comentarios de un restaurante",
     description:
-      "Se hizo un análisis mediante un modelo de inteligencia artificial previamente entrenado de los comentarios dejados en un restaurant. Este modelo está entrenado para entender comentarios en inglés por lo que se tuvieron que traducir para poder obtener una polaridad correcta.",
+      "¿Qué piensan realmente los clientes? Usando un modelo de NLP preentrenado, analicé los comentarios de un restaurante para medir el sentimiento — positivo, neutro o negativo — y entender qué aspectos generan cada reacción.",
     github: "https://github.com/MiguelVieirar16/Analisis_emociones",
     link: "https://app.powerbi.com/view?r=eyJrIjoiNDM3MmM4ZmMtYWVkMC00NGQxLWEwYTktMDU1ZmJlYjgzNzM1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
     dataset: "https://drive.google.com/drive/folders/1cj_oyLfZnQv-GnI33V02d8jYf5MDf_Gd?usp=sharing",
     image: "/projects/BI_EMOCIONES.webp",
     tags: [TAGS.POWERBI, TAGS.PYTHON],
   },
-{
-    title: "Ondas en moducilación AM",
+  {
+    title: "Ondas en modulación AM",
     description:
-      "Desarrollé una aplicación de escritorio en Python con interfaz gráfica que permite realizar modulación AM de manera fácil y rápida. La app cuenta con una interfaz gráfica intuitiva donde se puede seleccionar el tipo de onda portadora, su frecuencia y amplitud. Además, tiene 4 botones que permiten mostrar el mensaje, graficar la onda portadora, graficar la modulación resultante y comparar las diferentes ondas con el mensaje y la modulación.",
+      "Aplicación de escritorio para simular y visualizar modulación AM. Permite seleccionar tipo de onda portadora, frecuencia y amplitud, y comparar la señal original con la modulación resultante en tiempo real.",
     image: "/projects/generador.webp",
     github: "https://github.com/MiguelVieirar16/modulacionam",
     tags: [TAGS.PYTHON],
   },
-{
+  {
     title: "Medición Nutricional Antropométrica",
     description:
-      "Esta aplicación permite medir parámetros antropométricos en niños, adolescentes y adultos. La app incluye funciones para registrar usuarios, buscar y modificar datos, y programar citas médicas. Además, calcula el índice de masa corporal (IMC) a partir de los datos ingresados, así como otros parámetros que influyen en la medición antropométrica como lo es la circunferencia del brazo y semanas de gestación en caso de un embarazo. La aplicación se conecta a una base de datos NoSQL en Google Firebase.",
+      "App Android para registrar y calcular parámetros nutricionales — IMC, circunferencia de brazo, semanas de gestación — en pacientes de todas las edades. Conectada a Firebase para almacenamiento y seguimiento en tiempo real.",
     image: "/projects/androidapp.webp",
     github: "https://github.com/MiguelVieirar16/MedicionAntropometricaapp.git",
     tags: [TAGS.JAVA, TAGS.FIREBASE],
   },
-
 ]
 ---
 <div class="flex flex-col gap-y-16">
