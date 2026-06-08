@@ -12,6 +12,8 @@ import Java from "./icons/Java.astro"
 import Excel from "./icons/Excel.astro"
 import PowerBI from "./icons/PowerBI.astro"
 import Firebase from "./icons/Firebase.astro"
+import Flutter from "./icons/Flutter.astro"
+import NestJS from "./icons/NestJS.astro"
 import { getPortfolioProjects } from '../lib/github'
 import type { Project } from '../types/portfolio'
 
@@ -25,6 +27,8 @@ const TAG_ICONS: Record<string, { class: string; icon: any }> = {
   'Java':         { class: 'bg-[#663D00] text-white',     icon: Java },
   'Firebase':     { class: 'bg-[#9C4323] text-white',     icon: Firebase },
   'Excel':        { class: 'bg-[#0D321E] text-white',     icon: Excel },
+  'Flutter':      { class: 'bg-[#054A91] text-white',     icon: Flutter },
+  'NestJS':       { class: 'bg-[#E0234E] text-white',     icon: NestJS },
 }
 
 const STATIC_PROJECTS: Project[] = [
