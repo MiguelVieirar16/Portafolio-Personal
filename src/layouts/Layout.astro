@@ -17,6 +17,10 @@ const { description, title } = Astro.props
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      const __lang = localStorage.getItem('lang') || 'es';
+      document.documentElement.setAttribute('lang', __lang);
+    </script>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
