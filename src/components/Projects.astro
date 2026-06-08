@@ -14,6 +14,7 @@ import PowerBI from "./icons/PowerBI.astro"
 import Firebase from "./icons/Firebase.astro"
 import Flutter from "./icons/Flutter.astro"
 import NestJS from "./icons/NestJS.astro"
+import Supabase from "./icons/Supabase.astro"
 import { getPortfolioProjects } from '../lib/github'
 import type { Project } from '../types/portfolio'
 
@@ -29,6 +30,7 @@ const TAG_ICONS: Record<string, { class: string; icon: any }> = {
   'Excel':        { class: 'bg-[#0D321E] text-white',     icon: Excel },
   'Flutter':      { class: 'bg-[#054A91] text-white',     icon: Flutter },
   'NestJS':       { class: 'bg-[#E0234E] text-white',     icon: NestJS },
+  'Supabase':     { class: 'bg-[#1C3D2E] text-white',     icon: Supabase },
 }
 
 const STATIC_PROJECTS: Project[] = [
