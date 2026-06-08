@@ -7,9 +7,11 @@ interface Props {
   description: string
   link?: string
   date: string
+  titleKey?: string
+  descKey?: string
 }
 
-const { title, company, description, link, date } = Astro.props
+const { title, company, description, link, date, titleKey, descKey } = Astro.props
 ---
 
 <div
@@ -21,17 +23,17 @@ const { title, company, description, link, date } = Astro.props
         >&bull;</span
       >
 
-      <h3 class="text-xl font-bold text-yellow-400">{title}</h3>
+      <h3 class="text-xl font-bold text-yellow-400" data-i18n={titleKey}>{title}</h3>
       <h4 class="font-semibold text-xl text-gray-600 dark:text-white">{company}</h4>
       <time class="p-0 m-0 text-sm text-gray-600/80 dark:text-white/80">{date}</time>
     </div>
   </div>
   <div class="relative flex flex-col gap-2 pb-4 text-gray-600 dark:text-gray-300 md:col-span-3">
-    {description}
+    <p data-i18n={descKey}>{description}</p>
     {
       link && (
         <LinkInline href={link}>
-          Saber más{" "}
+          <span data-i18n="exp.more">Saber más</span>{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-5 icon icon-tabler icon-tabler-chevron-right"

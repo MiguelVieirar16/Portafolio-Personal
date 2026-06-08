@@ -41,9 +41,13 @@ const EXPERIENCE = [
 
 <ol class="relative mt-16">
   {
-    EXPERIENCE.map((experience) => (
+    EXPERIENCE.map((experience, index) => (
       <li class="">
-        <ExperienceItem {...experience} />
+        <ExperienceItem
+          {...experience}
+          titleKey={`exp.${index}.title`}
+          descKey={`exp.${index}.desc`}
+        />
       </li>
     ))
   }
