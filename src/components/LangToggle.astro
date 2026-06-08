@@ -49,11 +49,14 @@
     const lang = getLang()
     applyLang(lang)
 
-    document.getElementById('lang-toggle-btn')?.addEventListener('click', () => {
-      applyLang(getLang() === 'es' ? 'en' : 'es')
-    })
+    const btn = document.getElementById('lang-toggle-btn')
+    if (btn && !btn.dataset.bound) {
+      btn.dataset.bound = '1'
+      btn.addEventListener('click', () => {
+        applyLang(getLang() === 'es' ? 'en' : 'es')
+      })
+    }
   }
 
   document.addEventListener('astro:page-load', init)
-  document.addEventListener('astro:after-swap', () => applyLang(getLang()))
 </script>
