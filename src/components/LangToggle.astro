@@ -1,0 +1,59 @@
+---
+---
+
+<div class="relative ml-1 mr-1">
+  <button
+    transition:persist
+    id="lang-toggle-btn"
+    class="appearance-none border-none flex items-center justify-center px-2 py-1 text-xs font-semibold rounded-md hover:scale-110 transition text-gray-600 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-500"
+    aria-label="Toggle language"
+  >
+    ES
+  </button>
+</div>
+
+<script>
+  import { ui, defaultLang } from '../i18n/ui.ts'
+  import type { Lang } from '../i18n/ui.ts'
+
+  function getLang(): Lang {
+    const stored = localStorage.getItem('lang')
+    return stored === 'en' ? 'en' : defaultLang
+  }
+
+  function applyLang(lang: Lang) {
+    const translations = ui[lang]
+
+    document.querySelectorAll<HTMLElement>('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n') as keyof typeof translations
+      if (key in translations) el.textContent = translations[key]
+    })
+
+    document.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html') as keyof typeof translations
+      if (key in translations) el.innerHTML = translations[key]
+    })
+
+    document.title = translations['meta.title']
+    const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+    if (metaDesc) metaDesc.content = translations['meta.description']
+
+    document.documentElement.setAttribute('lang', lang)
+    localStorage.setItem('lang', lang)
+
+    const btn = document.getElementById('lang-toggle-btn')
+    if (btn) btn.textContent = lang.toUpperCase()
+  }
+
+  function init() {
+    const lang = getLang()
+    applyLang(lang)
+
+    document.getElementById('lang-toggle-btn')?.addEventListener('click', () => {
+      applyLang(getLang() === 'es' ? 'en' : 'es')
+    })
+  }
+
+  document.addEventListener('astro:page-load', init)
+  document.addEventListener('astro:after-swap', () => applyLang(getLang()))
+</script>
