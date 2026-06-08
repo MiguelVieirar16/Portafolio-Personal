@@ -19,6 +19,9 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# visual brainstorming sessions
+.superpowers/
 bun.*
 
 package-lock.json
