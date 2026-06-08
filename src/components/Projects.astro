@@ -12,167 +12,169 @@ import Java from "./icons/Java.astro"
 import Excel from "./icons/Excel.astro"
 import PowerBI from "./icons/PowerBI.astro"
 import Firebase from "./icons/Firebase.astro"
+import { getPortfolioProjects } from '../lib/github'
+import type { Project } from '../types/portfolio'
 
-const TAGS = {
-  NEXT: {
-    name: "Next.js",
-    class: "bg-black text-white",
-    icon: NextJS,
-  },
-  TAILWIND: {
-    name: "Tailwind CSS",
-    class: "bg-[#003159] text-white",
-    icon: Tailwind,
-  },
-  MYSQL: {
-    name: "MySQL",
-    class: "bg-[#084353] text-white",
-    icon: MySQL,
-  },
-  POSTGRE: {
-    name: "PostgreSQL",
-    class: "bg-[#336791] text-white",
-    icon: PostgreSQL,
-  },
-  POWERBI: {
-    name: "Power BI",
-    class: "bg-[#9C7F34] text-white",
-    icon: PowerBI,
-  },
-  PYTHON: {
-    name: "Python",
-    class: "bg-[#003159] text-white",
-    icon: Python,
-  },  
-  JAVA: {
-    name: "JAVA",
-    class: "bg-[#663D00] text-white",
-    icon: Java,
-  },
-  EXCEL: {
-    name: "Excel",
-    class: "bg-[#0D321E] text-white",
-    icon: Excel,
-  },
-  FIREBASE: {
-    name: "Firebase",
-    class: "bg-[#9C4323] text-white",
-    icon: Firebase,
-  },
+const TAG_ICONS: Record<string, { class: string; icon: any }> = {
+  'Next.js':      { class: 'bg-black text-white',         icon: NextJS },
+  'Tailwind CSS': { class: 'bg-[#003159] text-white',     icon: Tailwind },
+  'MySQL':        { class: 'bg-[#084353] text-white',     icon: MySQL },
+  'PostgreSQL':   { class: 'bg-[#336791] text-white',     icon: PostgreSQL },
+  'Power BI':     { class: 'bg-[#9C7F34] text-white',     icon: PowerBI },
+  'Python':       { class: 'bg-[#003159] text-white',     icon: Python },
+  'Java':         { class: 'bg-[#663D00] text-white',     icon: Java },
+  'Firebase':     { class: 'bg-[#9C4323] text-white',     icon: Firebase },
 }
-const PROJECTS = [
+
+const STATIC_PROJECTS: Project[] = [
   {
-    title: "Análisis de tasa de abandono de clientes",
-    description:
-      "¿Por qué se van los clientes? Este análisis desglosa el churn por ubicación, edad, género y plan contratado para identificar los segmentos con mayor riesgo y los factores que lo explican.",
-    image: "/projects/BI_CHURN.webp",
-    dataset: "https://drive.google.com/drive/folders/1WuzyeDklXYDkunIapGo3EViuUaDGla3n?usp=sharing",
-    link: "https://app.powerbi.com/view?r=eyJrIjoiNWMxYmZkZjctMTdmZi00NmViLWFjZTEtNmU4NjI4Zjc1NDExIiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
-    tags: [TAGS.POWERBI, TAGS.POSTGRE, TAGS.EXCEL],
+    titleEs: 'Análisis de tasa de abandono de clientes',
+    titleEn: 'Customer Churn Rate Analysis',
+    descEs: '¿Por qué se van los clientes? Este análisis desglosa el churn por ubicación, edad, género y plan contratado para identificar los segmentos con mayor riesgo y los factores que lo explican.',
+    descEn: 'Why do customers leave? This analysis breaks down churn by location, age, gender and plan to identify the highest-risk segments and the factors that explain it.',
+    image: '/projects/BI_CHURN.webp',
+    tags: ['Power BI', 'PostgreSQL', 'Excel'],
+    preview: 'https://app.powerbi.com/view?r=eyJrIjoiNWMxYmZkZjctMTdmZi00NmViLWFjZTEtNmU4NjI4Zjc1NDExIiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9',
+    dataset: 'https://drive.google.com/drive/folders/1WuzyeDklXYDkunIapGo3EViuUaDGla3n?usp=sharing',
+    featured: false,
+    order: 10,
   },
   {
-    title: "Análisis de satisfacción de empleados — Atlas Labs",
-    description:
-      "¿Qué retiene al talento? Un análisis de RRHH que cruza salarios, diversidad, satisfacción laboral y desgaste para entender qué factores impactan la retención en una empresa de tecnología.",
-    image: "/projects/BI_RRHH.webp",
-    dataset: "https://drive.google.com/drive/folders/1lOqMWMxMCr7iXypOELSjb1P1oYtfv6X4?usp=sharing",
-    link: "https://app.powerbi.com/view?r=eyJrIjoiNzQ2YmI3OTAtNDE4NS00ZDUxLTg1MzUtNGViNWI2Yjk0MTMxIiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
-    tags: [TAGS.POWERBI, TAGS.POSTGRE, TAGS.EXCEL],
+    titleEs: 'Análisis de satisfacción de empleados — Atlas Labs',
+    titleEn: 'Employee Satisfaction Analysis — Atlas Labs',
+    descEs: '¿Qué retiene al talento? Un análisis de RRHH que cruza salarios, diversidad, satisfacción laboral y desgaste para entender qué factores impactan la retención en una empresa de tecnología.',
+    descEn: 'What retains talent? An HR analysis crossing salaries, diversity, job satisfaction and burnout to understand what drives retention at a tech company.',
+    image: '/projects/BI_RRHH.webp',
+    tags: ['Power BI', 'PostgreSQL', 'Excel'],
+    preview: 'https://app.powerbi.com/view?r=eyJrIjoiNzQ2YmI3OTAtNDE4NS00ZDUxLTg1MzUtNGViNWI2Yjk0MTMxIiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9',
+    dataset: 'https://drive.google.com/drive/folders/1lOqMWMxMCr7iXypOELSjb1P1oYtfv6X4?usp=sharing',
+    featured: false,
+    order: 11,
   },
   {
-    title: "Perspectivas del mercado laboral en ciencia de datos",
-    description:
-      "¿Vale la pena entrar al campo de datos? Este análisis mapea la demanda real de perfiles, los salarios según experiencia y rol, y las habilidades que el mercado exige para quien quiera entrar o crecer en ciencia de datos.",
-    image: "/projects/BI_JOBS.webp",
-    dataset: "https://drive.google.com/drive/folders/1WoxQWfkLPk9wymdTMXjMUtxDLsTy3UXq?usp=sharing",
-    link: "https://app.powerbi.com/view?r=eyJrIjoiNGVkYmEwMWEtY2M0Mi00YWI1LWIxZmEtYzAxMjJmZmFmN2Q1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
-    tags: [TAGS.POWERBI, TAGS.MYSQL, TAGS.EXCEL],
+    titleEs: 'Perspectivas del mercado laboral en ciencia de datos',
+    titleEn: 'Data Science Job Market Insights',
+    descEs: '¿Vale la pena entrar al campo de datos? Este análisis mapea la demanda real de perfiles, los salarios según experiencia y rol, y las habilidades que el mercado exige para quien quiera entrar o crecer en ciencia de datos.',
+    descEn: 'Is it worth entering the data field? This analysis maps real demand for profiles, salaries by experience and role, and the skills the market requires to enter or grow in data science.',
+    image: '/projects/BI_JOBS.webp',
+    tags: ['Power BI', 'MySQL', 'Excel'],
+    preview: 'https://app.powerbi.com/view?r=eyJrIjoiNGVkYmEwMWEtY2M0Mi00YWI1LWIxZmEtYzAxMjJmZmFmN2Q1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9',
+    dataset: 'https://drive.google.com/drive/folders/1WoxQWfkLPk9wymdTMXjMUtxDLsTy3UXq?usp=sharing',
+    featured: false,
+    order: 12,
   },
   {
-    title: "Análisis de polaridad de comentarios de un restaurante",
-    description:
-      "¿Qué piensan realmente los clientes? Usando un modelo de NLP preentrenado, analicé los comentarios de un restaurante para medir el sentimiento — positivo, neutro o negativo — y entender qué aspectos generan cada reacción.",
-    github: "https://github.com/MiguelVieirar16/Analisis_emociones",
-    link: "https://app.powerbi.com/view?r=eyJrIjoiNDM3MmM4ZmMtYWVkMC00NGQxLWEwYTktMDU1ZmJlYjgzNzM1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9",
-    dataset: "https://drive.google.com/drive/folders/1cj_oyLfZnQv-GnI33V02d8jYf5MDf_Gd?usp=sharing",
-    image: "/projects/BI_EMOCIONES.webp",
-    tags: [TAGS.POWERBI, TAGS.PYTHON],
+    titleEs: 'Análisis de polaridad de comentarios de un restaurante',
+    titleEn: 'Restaurant Review Sentiment Analysis',
+    descEs: '¿Qué piensan realmente los clientes? Usando un modelo de NLP preentrenado, analicé los comentarios de un restaurante para medir el sentimiento — positivo, neutro o negativo — y entender qué aspectos generan cada reacción.',
+    descEn: 'What do customers really think? Using a pre-trained NLP model, I analyzed restaurant reviews to measure sentiment — positive, neutral or negative — and understand what aspects drive each reaction.',
+    image: '/projects/BI_EMOCIONES.webp',
+    tags: ['Power BI', 'Python'],
+    github: 'https://github.com/MiguelVieirar16/Analisis_emociones',
+    preview: 'https://app.powerbi.com/view?r=eyJrIjoiNDM3MmM4ZmMtYWVkMC00NGQxLWEwYTktMDU1ZmJlYjgzNzM1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9',
+    dataset: 'https://drive.google.com/drive/folders/1cj_oyLfZnQv-GnI33V02d8jYf5MDf_Gd?usp=sharing',
+    featured: false,
+    order: 13,
   },
   {
-    title: "Ondas en modulación AM",
-    description:
-      "Aplicación de escritorio para simular y visualizar modulación AM. Permite seleccionar tipo de onda portadora, frecuencia y amplitud, y comparar la señal original con la modulación resultante en tiempo real.",
-    image: "/projects/generador.webp",
-    github: "https://github.com/MiguelVieirar16/modulacionam",
-    tags: [TAGS.PYTHON],
+    titleEs: 'Ondas en modulación AM',
+    titleEn: 'AM Modulation Waveforms',
+    descEs: 'Aplicación de escritorio para simular y visualizar modulación AM. Permite seleccionar tipo de onda portadora, frecuencia y amplitud, y comparar la señal original con la modulación resultante en tiempo real.',
+    descEn: 'Desktop app to simulate and visualize AM modulation. Select carrier wave type, frequency and amplitude, and compare the original signal with the resulting modulation in real time.',
+    image: '/projects/generador.webp',
+    tags: ['Python'],
+    github: 'https://github.com/MiguelVieirar16/modulacionam',
+    featured: false,
+    order: 14,
   },
   {
-    title: "Medición Nutricional Antropométrica",
-    description:
-      "App Android para registrar y calcular parámetros nutricionales — IMC, circunferencia de brazo, semanas de gestación — en pacientes de todas las edades. Conectada a Firebase para almacenamiento y seguimiento en tiempo real.",
-    image: "/projects/androidapp.webp",
-    github: "https://github.com/MiguelVieirar16/MedicionAntropometricaapp.git",
-    tags: [TAGS.JAVA, TAGS.FIREBASE],
+    titleEs: 'Medición Nutricional Antropométrica',
+    titleEn: 'Anthropometric Nutritional Assessment',
+    descEs: 'App Android para registrar y calcular parámetros nutricionales — IMC, circunferencia de brazo, semanas de gestación — en pacientes de todas las edades. Conectada a Firebase para almacenamiento y seguimiento en tiempo real.',
+    descEn: 'Android app to record and calculate nutritional parameters — BMI, arm circumference, weeks of gestation — for patients of all ages. Connected to Firebase for real-time storage and tracking.',
+    image: '/projects/androidapp.webp',
+    tags: ['Java', 'Firebase'],
+    github: 'https://github.com/MiguelVieirar16/MedicionAntropometricaapp.git',
+    featured: false,
+    order: 15,
   },
 ]
+
+let dynamicProjects: Project[] = []
+try {
+  dynamicProjects = await getPortfolioProjects()
+} catch (e) {
+  console.warn('[portfolio] GitHub fetch failed, using static projects only:', e)
+}
+
+const allProjects = [...dynamicProjects, ...STATIC_PROJECTS]
 ---
+
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {
-    PROJECTS.map(({ image, title, description, tags, link, github, dataset }, index) => (
-      <article class="bg-white  border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col">
-        <div class="h-40 overflow-hidden">
-          <img
-            class="w-full h-full object-cover object-top"
-            loading="lazy"
-            src={image}
-            alt={title}
-          />
-        </div>
-        <div class="p-4 flex flex-col flex-1">
-          <h3
-            class="text-base font-bold text-slate-900 mb-2 leading-snug"
-            data-i18n={`project.${index}.title`}
-          >
-            {title}
-          </h3>
-          <p
-            class="text-sm text-slate-600 line-clamp-3 mb-3"
-            data-i18n={`project.${index}.desc`}
-          >
-            {description}
-          </p>
-          <ul class="flex flex-wrap gap-x-2 gap-y-1 mb-4">
-            {tags.map((tag) => (
-              <li>
-                <span class="flex gap-x-1 items-center rounded-full text-xs py-1 px-2 bg-blue-50 text-blue-700 border border-blue-200">
-                  <tag.icon class="size-3" />
-                  {tag.name}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <footer class="flex items-center gap-x-3 mt-auto">
-            {github && (
-              <LinkButton href={github}>
-                <GitHub class="size-4" />
-                Code
-              </LinkButton>
-            )}
-            {link && (
-              <LinkButton href={link}>
-                <Link class="size-4" />
-                Preview
-              </LinkButton>
-            )}
-            {dataset && (
-              <LinkButton href={dataset}>
-                <Dataset class="size-4" />
-                Dataset
-              </LinkButton>
-            )}
-          </footer>
-        </div>
-      </article>
-    ))
+    allProjects.map((project) => {
+      return (
+        <article class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col">
+          <div class="h-40 overflow-hidden">
+            <img
+              class="w-full h-full object-cover object-top"
+              loading="lazy"
+              src={project.image}
+              alt={project.titleEs}
+            />
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <h3
+              class="text-base font-bold text-slate-900 mb-2 leading-snug"
+              data-i18n-es={project.titleEs}
+              data-i18n-en={project.titleEn}
+            >
+              {project.titleEs}
+            </h3>
+            <p
+              class="text-sm text-slate-600 line-clamp-3 mb-3"
+              data-i18n-es={project.descEs}
+              data-i18n-en={project.descEn}
+            >
+              {project.descEs}
+            </p>
+            <ul class="flex flex-wrap gap-x-2 gap-y-1 mb-4">
+              {project.tags.map((tagName) => {
+                const tagDef = TAG_ICONS[tagName]
+                const TagIcon = tagDef?.icon
+                return (
+                  <li>
+                    <span class={`flex gap-x-1 items-center rounded-full text-xs py-1 px-2 border ${tagDef ? tagDef.class + ' border-transparent' : 'bg-slate-700 text-white border-slate-600'}`}>
+                      {TagIcon && <TagIcon class="size-3" />}
+                      {tagName}
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+            <footer class="flex items-center gap-x-3 mt-auto">
+              {project.github && (
+                <LinkButton href={project.github}>
+                  <GitHub class="size-4" />
+                  Code
+                </LinkButton>
+              )}
+              {project.preview && (
+                <LinkButton href={project.preview}>
+                  <Link class="size-4" />
+                  Preview
+                </LinkButton>
+              )}
+              {project.dataset && (
+                <LinkButton href={project.dataset}>
+                  <Dataset class="size-4" />
+                  Dataset
+                </LinkButton>
+              )}
+            </footer>
+          </div>
+        </article>
+      )
+    })
   }
 </div>
