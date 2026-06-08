@@ -34,6 +34,12 @@
       if (key in translations) el.innerHTML = translations[key]
     })
 
+    document.querySelectorAll<HTMLElement>('[data-i18n-es]').forEach(el => {
+      const es = el.getAttribute('data-i18n-es') ?? ''
+      const en = el.getAttribute('data-i18n-en') ?? es
+      el.textContent = lang === 'en' ? en : es
+    })
+
     document.title = translations['meta.title']
     const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     if (metaDesc) metaDesc.content = translations['meta.description']
