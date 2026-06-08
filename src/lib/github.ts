@@ -28,11 +28,12 @@ function fetchWithAuth(url: string): Promise<Response> {
 }
 
 async function fetchPortfolioJson(repo: GitHubRepo): Promise<Project> {
-  const url = `${GITHUB_API}/repos/${repo.full_name}/contents/portfolio.json`
+  const url = `${GITHUB_API}/repos/${repo.full_name}/contents/portfolio.json?ref=${repo.default_branch}`
   const res = await fetchWithAuth(url)
   if (!res.ok) throw new Error(`No portfolio.json in ${repo.name}: ${res.status}`)
 
   const data: GitHubContentsResponse = await res.json()
+  if (!data.content) throw new Error(`Unexpected response shape for portfolio.json in ${repo.name}`)
   const raw: RawPortfolioJson = JSON.parse(
     Buffer.from(data.content.replace(/\n/g, ''), 'base64').toString('utf-8')
   )
@@ -52,6 +53,7 @@ async function fetchPortfolioJson(repo: GitHubRepo): Promise<Project> {
 }
 
 export async function getPortfolioProjects(): Promise<Project[]> {
+  // Note: limited to 100 repos. If you ever exceed this, add Link header pagination.
   const res = await fetchWithAuth(`${GITHUB_API}/user/repos?per_page=100&type=all`)
   if (!res.ok) throw new Error(`GitHub API error fetching repos: ${res.status}`)
 
@@ -63,8 +65,8 @@ export async function getPortfolioProjects(): Promise<Project[]> {
   )
 
   results
-    .filter(r => r.status === 'rejected')
-    .forEach(r => console.warn('[portfolio] skipped repo:', (r as PromiseRejectedResult).reason))
+    .filter((r): r is PromiseRejectedResult => r.status === 'rejected')
+    .forEach(r => console.warn('[portfolio] skipped repo:', r.reason))
 
   return results
     .filter((r): r is PromiseFulfilledResult<Project> => r.status === 'fulfilled')

@@ -16,7 +16,7 @@ export interface RawPortfolioJson {
   title: { es: string; en: string }
   description: { es: string; en: string }
   image: string
-  tags: string[]
+  tags?: string[]
   links?: { github?: string; preview?: string }
   featured?: boolean
   order?: number
