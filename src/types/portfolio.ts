@@ -7,7 +7,7 @@ export interface Project {
   tags: string[]
   github?: string
   preview?: string
-  dataset?: string
+  dataset?: string  // only used by static projects (not from portfolio.json)
   featured: boolean
   order: number
 }
