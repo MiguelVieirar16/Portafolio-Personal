@@ -27,6 +27,14 @@ function fetchWithAuth(url: string): Promise<Response> {
   })
 }
 
+function resolveImageUrl(image: string, repo: GitHubRepo): string {
+  if (/^https?:\/\//.test(image)) return image
+  // Leading slash = asset served from this portfolio's public/ folder
+  // (needed for private repos, whose raw.githubusercontent URLs aren't public)
+  if (image.startsWith('/')) return image
+  return `https://raw.githubusercontent.com/${repo.full_name}/${repo.default_branch}/${image}`
+}
+
 async function fetchPortfolioJson(repo: GitHubRepo): Promise<Project> {
   const url = `${GITHUB_API}/repos/${repo.full_name}/contents/portfolio.json?ref=${repo.default_branch}`
   const res = await fetchWithAuth(url)
@@ -43,7 +51,7 @@ async function fetchPortfolioJson(repo: GitHubRepo): Promise<Project> {
     titleEn: raw.title.en,
     descEs: raw.description.es,
     descEn: raw.description.en,
-    image: raw.image,
+    image: resolveImageUrl(raw.image, repo),
     tags: raw.tags ?? [],
     github: raw.links?.github,
     preview: raw.links?.preview,
