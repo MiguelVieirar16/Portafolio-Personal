@@ -16,10 +16,12 @@ import Flutter from "./icons/Flutter.astro"
 import NestJS from "./icons/NestJS.astro"
 import Supabase from "./icons/Supabase.astro"
 import OpenAI from "./icons/OpenAI.astro"
+import ReactIcon from "./icons/React.astro"
 import { getPortfolioProjects } from '../lib/github'
 import type { Project } from '../types/portfolio'
 
 const TAG_ICONS: Record<string, { class: string; icon: any }> = {
+  'React':        { class: 'bg-[#20232a] text-[#61DAFB]', icon: ReactIcon },
   'Next.js':      { class: 'bg-black text-white',         icon: NextJS },
   'Tailwind CSS': { class: 'bg-[#003159] text-white',     icon: Tailwind },
   'MySQL':        { class: 'bg-[#084353] text-white',     icon: MySQL },
@@ -36,6 +38,17 @@ const TAG_ICONS: Record<string, { class: string; icon: any }> = {
 }
 
 const STATIC_PROJECTS: Project[] = [
+  {
+    titleEs: 'Lucro',
+    titleEn: 'Lucro',
+    descEs: 'Ledger de cripto lote por lote. Cada compra conserva su precio: ves lo invertido, el valor y la ganancia de lo que sigue abierto.',
+    descEn: 'Lot-by-lot crypto ledger. Every buy keeps its price: see invested capital, current value and P&L on what is still open.',
+    image: '/projects/lucro.webp',
+    tags: ['React', 'Tailwind CSS', 'PostgreSQL'],
+    preview: 'https://lucro-two.vercel.app',
+    featured: true,
+    order: 0,
+  },
   {
     titleEs: 'Análisis de tasa de abandono de clientes',
     titleEn: 'Customer Churn Rate Analysis',
@@ -79,7 +92,7 @@ const STATIC_PROJECTS: Project[] = [
     descEn: 'What do customers really think? Using a pre-trained NLP model, I analyzed restaurant reviews to measure sentiment — positive, neutral or negative — and understand what aspects drive each reaction.',
     image: '/projects/BI_EMOCIONES.webp',
     tags: ['Power BI', 'Python'],
-    github: 'https://github.com/MiguelVieirar16/Analisis_emociones',
+    github: 'https://github.com/vieirarmiguel/Analisis_emociones',
     preview: 'https://app.powerbi.com/view?r=eyJrIjoiNDM3MmM4ZmMtYWVkMC00NGQxLWEwYTktMDU1ZmJlYjgzNzM1IiwidCI6ImUxOGVhZDk1LWZkY2ItNDE2MC05ZjY0LTg5ZDNhNWYxNWEyNCJ9',
     dataset: 'https://drive.google.com/drive/folders/1cj_oyLfZnQv-GnI33V02d8jYf5MDf_Gd?usp=sharing',
     featured: false,
@@ -92,7 +105,7 @@ const STATIC_PROJECTS: Project[] = [
     descEn: 'Desktop app to simulate and visualize AM modulation. Select carrier wave type, frequency and amplitude, and compare the original signal with the resulting modulation in real time.',
     image: '/projects/generador.webp',
     tags: ['Python'],
-    github: 'https://github.com/MiguelVieirar16/modulacionam',
+    github: 'https://github.com/vieirarmiguel/modulacionam',
     featured: false,
     order: 14,
   },
@@ -103,7 +116,7 @@ const STATIC_PROJECTS: Project[] = [
     descEn: 'Android app to record and calculate nutritional parameters — BMI, arm circumference, weeks of gestation — for patients of all ages. Connected to Firebase for real-time storage and tracking.',
     image: '/projects/androidapp.webp',
     tags: ['Java', 'Firebase'],
-    github: 'https://github.com/MiguelVieirar16/MedicionAntropometricaapp.git',
+    github: 'https://github.com/vieirarmiguel/MedicionAntropometricaapp.git',
     featured: false,
     order: 15,
   },
@@ -116,7 +129,12 @@ try {
   console.warn('[portfolio] GitHub fetch failed, using static projects only:', e)
 }
 
-const allProjects = [...dynamicProjects, ...STATIC_PROJECTS]
+const allProjects = [...STATIC_PROJECTS, ...dynamicProjects]
+  .filter((p, i, arr) => arr.findIndex((x) => x.titleEs === p.titleEs) === i)
+  .sort((a, b) => {
+    if (a.featured !== b.featured) return a.featured ? -1 : 1
+    return a.order - b.order
+  })
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
