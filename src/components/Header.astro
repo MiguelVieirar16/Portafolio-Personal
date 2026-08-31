@@ -1,65 +1,60 @@
 ---
-const navItems = [
-  {
-    title: "Inicio",
-    label: "inicio",
-    url: "/",
-  },
-  {
-    title: "Consultorios",
-    label: "consultorios",
-    url: "/consultorios",
-  },
-  {
-    title: "Trabajo",
-    label: "trabajo",
-    url: "/trabajo",
-  },
-  {
-    title: "Contacto",
-    label: "contacto",
-    url: "mailto:hola@vieirarmiguel.com",
-  },
+interface Props {
+  tone?: "brown" | "blue"
+}
+
+const { tone = "blue" } = Astro.props
+const path = Astro.url.pathname.replace(/\/$/, "") || "/"
+const blue = tone === "blue"
+
+const links = [
+  { title: "Inicio", url: "/", exact: true },
+  { title: "Consultorios", url: "/consultorios", exact: false },
+  { title: "Trabajo", url: "/trabajo", exact: false },
 ]
 ---
 
 <header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
+  class:list={[
+    "sticky top-0 z-20 h-14",
+    blue
+      ? "border-b border-slate-200 bg-white/90 backdrop-blur"
+      : "border-b border-line bg-paper/90 backdrop-blur",
+  ]}
 >
-  <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 justify-center items-center"
-  >
-    {
-      navItems.map((link) => (
-        <a
-          class="relative block px-2 py-2 transition hover:text-blue-500"
-          aria-label={link.label}
-          href={link.url}
-        >
-          {link.title}
-        </a>
-      ))
-    }
+  <nav class="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-3 px-5 sm:px-8">
+    <div class="flex h-14 items-center gap-1 text-sm font-medium">
+      {
+        links.map((link) => {
+          const active = link.exact ? path === link.url : path.startsWith(link.url)
+          return (
+            <a
+              href={link.url}
+              class:list={[
+                "inline-flex h-14 items-center px-3",
+                blue
+                  ? active
+                    ? "text-blue-600"
+                    : "text-slate-500 hover:text-blue-600"
+                  : active
+                    ? "text-ink"
+                    : "text-ink-muted hover:text-ink",
+              ]}
+            >
+              {link.title}
+            </a>
+          )
+        })
+      }
+    </div>
+    <a
+      href="mailto:hola@vieirarmiguel.com"
+      class:list={[
+        "inline-flex h-9 items-center rounded-md px-3.5 text-sm font-medium",
+        blue ? "bg-blue-600 text-white" : "bg-forest text-forest-fg",
+      ]}
+    >
+      Escribir
+    </a>
   </nav>
 </header>
-
-<style>
-  nav {
-    animation: nav-shadown 1s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 100px;
-  }
-
-  nav {
-    @apply bg-white/50;
-  }
-
-  @keyframes nav-shadown {
-    0% {
-      @apply bg-white/0;
-    }
-    to {
-      @apply shadow-lg ring-1 backdrop-blur ring-white/10;
-    }
-  }
-</style>

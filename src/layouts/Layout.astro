@@ -8,9 +8,11 @@ import { ViewTransitions } from "astro:transitions"
 interface Props {
   title: string
   description: string
+  tone?: "brown" | "blue"
 }
 
-const { description, title } = Astro.props
+const { description, title, tone = "blue" } = Astro.props
+const brown = tone === "brown"
 ---
 
 <!doctype html>
@@ -18,26 +20,38 @@ const { description, title } = Astro.props
   <head>
     <meta charset="UTF-8" />
     <script is:inline>
-      const __lang = localStorage.getItem('lang') || 'es';
-      document.documentElement.setAttribute('lang', __lang);
+      const __lang = localStorage.getItem("lang") || "es"
+      document.documentElement.setAttribute("lang", __lang)
     </script>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {
+      brown && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;500;600&display=swap"
+            rel="stylesheet"
+          />
+        </>
+      )
+    }
     <ViewTransitions />
   </head>
 
-  <body class="relative text-black">
-    <div
-      class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-[#f8fafc]
-      bg-[linear-gradient(to_bottom,transparent,rgba(37,99,235,0.07))]"
-    >
-    </div>
-    <Header />
+  <body class:list={["relative", brown ? "bg-paper text-ink" : "text-black"]}>
+    {
+      !brown && (
+        <div class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-[#f8fafc] bg-[linear-gradient(to_bottom,transparent,rgba(37,99,235,0.07))]" />
+      )
+    }
+    <Header tone={tone} />
     <slot />
-    <Footer />
+    {tone === "blue" && <Footer />}
     <style is:global>
       html {
         font-family: "Onest Variable", system-ui, sans-serif;
@@ -52,29 +66,18 @@ const { description, title } = Astro.props
         overscroll-behavior: none;
       }
 
+      body.bg-paper {
+        font-family: "Source Sans 3", system-ui, sans-serif;
+        color: #1c1917;
+      }
+
+      .font-display {
+        font-family: "Fraunces", "Times New Roman", serif;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
-        }
-      }
-
-      #header-nav {
-        animation: blur linear both 0.5s;
-        animation-timeline: scroll();
-        animation-range: 0 500px;
-      }
-
-      @keyframes blur {
-        to {
-          backdrop-filter: blur(20px);
-          border-width: 1px;
-          border-color: rgba(0, 0, 0);
-          padding: 0.25rem 0.75rem;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          background-color: rgb(229, 229, 229);
-          border-radius: 9999px;
         }
       }
     </style>
