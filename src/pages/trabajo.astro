@@ -1,0 +1,49 @@
+---
+import Layout from "@/layouts/Layout.astro"
+
+import AboutMe from "@/components/AboutMe.astro"
+import Briefcase from "@/components/icons/Briefcase.astro"
+import CodeIcon from "@/components/icons/Code.astro"
+import Experience from "@/components/Experience.astro"
+import ProfileCheck from "@/components/icons/ProfileCheck.astro"
+import Projects from "@/components/Projects.astro"
+import SectionContainer from "@/components/SectionContainer.astro"
+import Hero from "@/components/Hero.astro"
+import TitleSection from "@/components/TitleSection.astro"
+---
+
+<Layout
+  title="Miguel Vieira | Trabajo"
+  description="PM con background técnico. Del dato a la decisión, de la idea al producto."
+>
+  <main class="px-4">
+    <SectionContainer class="py-16 md:py-36">
+      <Hero />
+    </SectionContainer>
+    <div class="space-y-24">
+    <SectionContainer id="proyectos">
+      <TitleSection>
+        <CodeIcon class="size-7" />
+        <span data-i18n="section.projects">Proyectos</span>
+      </TitleSection>
+      <Projects />
+    </SectionContainer>
+
+    <SectionContainer id="experiencia">
+      <TitleSection>
+        <Briefcase class="size-8" />
+        <span data-i18n="section.experience">Experiencia laboral</span>
+      </TitleSection>
+      <Experience />
+    </SectionContainer>
+
+    <SectionContainer id="sobre-mi">
+      <TitleSection>
+        <ProfileCheck class="size-8" />
+        <span data-i18n="section.about">Sobre mí</span>
+      </TitleSection>
+      <AboutMe />
+    </SectionContainer>
+  </div>
+  </main>
+</Layout>

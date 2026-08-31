@@ -1,30 +1,24 @@
 ---
-import LangToggle from "./LangToggle.astro"
-
 const navItems = [
   {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
-    i18n: "nav.projects",
+    title: "Inicio",
+    label: "inicio",
+    url: "/",
   },
   {
-    title: "Experiencia",
-    label: "experiencia",
-    url: "/#experiencia",
-    i18n: "nav.experience",
+    title: "Consultorios",
+    label: "consultorios",
+    url: "/consultorios",
   },
   {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
-    i18n: "nav.about",
+    title: "Trabajo",
+    label: "trabajo",
+    url: "/trabajo",
   },
   {
     title: "Contacto",
     label: "contacto",
-    url: "mailto:miguelvieirar16@gmail.com",
-    i18n: "nav.contact",
+    url: "mailto:hola@vieirarmiguel.com",
   },
 ]
 ---
@@ -41,56 +35,13 @@ const navItems = [
           class="relative block px-2 py-2 transition hover:text-blue-500"
           aria-label={link.label}
           href={link.url}
-          data-i18n={link.i18n}
         >
           {link.title}
         </a>
       ))
     }
-    <LangToggle />
   </nav>
 </header>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
-
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-blue-500")
-            } else {
-              item.classList.remove("text-blue-500")
-            }
-          })
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    })
-
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
-
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect()
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
-      }
-    }
-  })
-</script>
 
 <style>
   nav {

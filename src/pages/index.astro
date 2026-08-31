@@ -1,51 +1,43 @@
 ---
 import Layout from "@/layouts/Layout.astro"
-
-import AboutMe from "@/components/AboutMe.astro"
-import Briefcase from "@/components/icons/Briefcase.astro"
-import CodeIcon from "@/components/icons/Code.astro"
-import Experience from "@/components/Experience.astro"
-import ProfileCheck from "@/components/icons/ProfileCheck.astro"
-import Projects from "@/components/Projects.astro"
-import SectionContainer from "@/components/SectionContainer.astro"
-import Hero from "@/components/Hero.astro"
-import TitleSection from "@/components/TitleSection.astro"
 ---
 
 <Layout
-  title="Miguel Vieira | Portafolio"
-  description="PM con background técnico. Del dato a la decisión, de la idea al producto."
+  title="Miguel Vieira"
+  description="Canal de pacientes para consultorios hispanos. Portafolio de producto."
 >
-  <main class="px-4">
-    <SectionContainer class="py-16 md:py-36">
-      <Hero>
-      </slot>
-    </Hero>
-    </SectionContainer>
-    <div class="space-y-24">
-    <SectionContainer id="proyectos">
-      <TitleSection>
-        <CodeIcon class="size-7" />
-        <span data-i18n="section.projects">Proyectos</span>
-      </TitleSection>
-      <Projects />
-    </SectionContainer>
-
-    <SectionContainer id="experiencia">
-      <TitleSection>
-        <Briefcase class="size-8" />
-        <span data-i18n="section.experience">Experiencia laboral</span>
-      </TitleSection>
-      <Experience />
-    </SectionContainer>
-
-    <SectionContainer id="sobre-mi">
-      <TitleSection>
-        <ProfileCheck class="size-8" />
-        <span data-i18n="section.about">Sobre mí</span>
-      </TitleSection>
-      <AboutMe />
-    </SectionContainer>
-  </div>
+  <main class="px-4 min-h-[70vh] flex items-center">
+    <section class="max-w-2xl mx-auto py-28 w-full">
+      <p class="text-sm text-zinc-500">Miguel Vieira</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">
+        Dos cosas distintas. Elige la puerta.
+      </h1>
+      <p class="mt-5 text-lg text-zinc-600">
+        Si tienes un consultorio y quieres que te escriban por WhatsApp, esa es una página.
+        Si quieres ver cómo trabajo producto, esa es otra.
+      </p>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        <a
+          href="/consultorios"
+          class="rounded-2xl border border-zinc-200 bg-white p-6 hover:border-blue-500 hover:shadow-sm transition"
+        >
+          <p class="text-xs uppercase tracking-wide text-blue-600 font-semibold">Para el consultorio</p>
+          <h2 class="mt-2 text-xl font-semibold text-zinc-900">Consultorios</h2>
+          <p class="mt-2 text-sm text-zinc-600">
+            Una página de un servicio, Google ordenado y WhatsApp en 14 días.
+          </p>
+        </a>
+        <a
+          href="/trabajo"
+          class="rounded-2xl border border-zinc-200 bg-white p-6 hover:border-zinc-400 hover:shadow-sm transition"
+        >
+          <p class="text-xs uppercase tracking-wide text-zinc-500 font-semibold">Portafolio</p>
+          <h2 class="mt-2 text-xl font-semibold text-zinc-900">Trabajo</h2>
+          <p class="mt-2 text-sm text-zinc-600">
+            Producto en Telefónica y proyectos que he construido.
+          </p>
+        </a>
+      </div>
+    </section>
   </main>
 </Layout>
