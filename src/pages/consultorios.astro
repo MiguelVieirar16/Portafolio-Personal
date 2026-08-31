@@ -1,78 +1,367 @@
 ---
 import Layout from "@/layouts/Layout.astro"
+
+const pains = [
+  {
+    title: "Hay Instagram. No hay citas atribuibles.",
+    body: "Se publica todos los días. Al cierre del mes no se puede decir qué paciente salió de ahí.",
+  },
+  {
+    title: "En Google el consultorio aparece incompleto o con otro nombre.",
+    body: "Horario viejo, fotos de 2019, botón que llama a un número que ya no se atiende.",
+  },
+  {
+    title: "La web pide nombre, correo, motivo y fecha. Nadie la manda.",
+    body: "El paciente ya está en el teléfono. Un formulario de ocho campos es un abandono.",
+  },
+  {
+    title: "La agenda tiene huecos y la recepción no sabe de dónde vino la llamada.",
+    body: "Sin origen no hay canal. Sin canal, cada mes se empieza de cero.",
+  },
+]
+
+const services = [
+  {
+    title: "Página de un servicio",
+    body: "Una oferta, una zona, una promesa. Sin menú de ocho especialidades.",
+  },
+  {
+    title: "WhatsApp con el mensaje listo",
+    body: "El paciente escribe. El servicio ya va en el chat. Queda el rastro.",
+  },
+  {
+    title: "Perfil de Google ordenado",
+    body: "Categorías, fotos, horario y botón. Verificación a cargo del consultorio.",
+  },
+  {
+    title: "Dominio y alojamiento",
+    body: "El dominio queda a nombre del consultorio. SSL incluido. Dos cambios al mes, 48 h hábiles.",
+  },
+]
+
+const included = [
+  "Landing de un servicio y una zona",
+  "Botón a WhatsApp con mensaje preescrito",
+  "Orden del perfil de Google Business",
+  "Dominio a nombre del consultorio",
+  "Alojamiento y certificado SSL",
+  "Dos cambios al mes, 48 h hábiles",
+]
+
+const excluded = [
+  "Tienda, pasarela o sistema de reservas",
+  "Campañas de anuncios o gestión de presupuesto publicitario",
+  "Blog, SEO de meses o CRM",
+  "Sitio de varias páginas o rediseño de marca",
+]
+
+const steps = [
+  { day: "Día 0", title: "Intake", body: "Datos, fotos y número de WhatsApp. El plazo empieza cuando están completos." },
+  { day: "Día 2", title: "Copy", body: "Un servicio. Una promesa. Sin claims clínicos." },
+  { day: "Día 5", title: "Demo", body: "URL de prueba. Dos rondas de ajuste dentro del alcance." },
+  { day: "Día 8", title: "Google", body: "Perfil ordenado. La verificación la hace el dueño de la ficha." },
+  { day: "Día 14", title: "Al aire", body: "Dominio vivo. Empieza el conteo de chats del canal." },
+]
+
+const faqs = [
+  {
+    q: "¿Qué incluye exactamente la página?",
+    a: "Una landing de un servicio, botón a WhatsApp, perfil de Google ordenado, dominio, alojamiento y dos cambios al mes.",
+  },
+  {
+    q: "¿Sirve si ya hay web o Instagram?",
+    a: "Sí. El alcance no sustituye redes: añade un destino medible. Lo que no entra es rediseñar la web existente ni gestionar las cuentas sociales.",
+  },
+  {
+    q: "¿De quién es el dominio?",
+    a: "Del consultorio. Si el servicio se corta, el dominio y el perfil de Google siguen ahí.",
+  },
+  {
+    q: "¿Cuánto tarda?",
+    a: "14 días desde intake completo. Si faltan fotos o el número de WhatsApp, el reloj no corre.",
+  },
+  {
+    q: "¿Qué diferencia hay entre piloto y lista?",
+    a: "Piloto: 2 cupos, precio de entrada más bajo (297 de setup + 3 meses a 99 adelantados = 594). A 30 días, si no hay chats del canal, se corta. Lista: precio de operación (497 de setup + 149/mes, mínimo 3 meses), sin cupo promocional.",
+  },
+  {
+    q: "¿Incluye anuncios?",
+    a: "No. El producto convierte la visita en un chat. Las campañas, si las hay, las corre el consultorio con su propia cuenta.",
+  },
+  {
+    q: "¿Cómo se paga?",
+    a: "En dólares, adelantado. Payoneer o USDT. El setup se cobra antes de empezar.",
+  },
+]
 ---
 
 <Layout
-  title="Consultorios | Miguel Vieira"
-  description="Landing de un servicio, Google Business y WhatsApp en 14 días para consultorios que atienden en español."
+  title="Consultorios"
+  description="Canal de pacientes: página de un servicio, Google y WhatsApp en 14 días."
+  tone="brown"
 >
-  <main class="px-4">
-    <article class="max-w-2xl mx-auto py-24 space-y-14">
-      <header>
-        <p class="text-sm text-blue-600 font-medium">Sistema de captación</p>
-        <h1 class="mt-3 text-4xl font-bold tracking-tight text-zinc-900">
-          Que el próximo paciente te escriba hoy, no que “tengas web”.
-        </h1>
-        <p class="mt-5 text-lg text-zinc-600">
-          Para consultorios de 1 a 4 profesionales que atienden en español.
-          En 14 días dejo una página de un solo servicio, Google ordenado y el clic va a WhatsApp.
-          El dominio queda a nombre de ustedes.
+  <section class="mx-auto max-w-5xl px-5 pb-16 pt-8 sm:px-8 sm:pt-12">
+    <h1 class="max-w-3xl font-display text-4xl leading-[1.08] tracking-tight sm:text-5xl">
+      El consultorio atiende. La agenda no se llena sola.
+    </h1>
+    <p class="mt-5 max-w-xl text-lg text-ink-muted">
+      Pacientes que llegan y no se puede decir de dónde. Huecos entre citas.
+      Un perfil de Google que no convierte. Eso es lo que resuelve el sistema.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="mailto:hola@vieirarmiguel.com?subject=Piloto%20consultorio"
+        class="inline-flex min-h-11 items-center rounded-md bg-forest px-5 py-3 text-sm font-medium text-forest-fg"
+      >
+        Pedir piloto
+      </a>
+      <a
+        href="#precio"
+        class="inline-flex min-h-11 items-center rounded-md border border-line-strong px-5 py-3 text-sm font-medium"
+      >
+        Ver precios
+      </a>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-paper-elevated">
+    <div class="mx-auto grid max-w-5xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-2">
+      {
+        pains.map((p) => (
+          <article>
+            <h2 class="font-medium leading-snug">{p.title}</h2>
+            <p class="mt-2 text-sm text-ink-muted">{p.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5 py-20 sm:px-8">
+    <p class="text-xs font-medium uppercase tracking-[0.16em] text-ink-subtle">
+      Qué incluye
+    </p>
+    <h2 class="mt-2 font-display text-3xl">Cuatro piezas. Un canal.</h2>
+    <div class="mt-10 grid gap-8 sm:grid-cols-2">
+      {
+        services.map((s) => (
+          <article class="rounded-lg border border-line bg-paper-elevated p-5">
+            <h3 class="font-medium">{s.title}</h3>
+            <p class="mt-2 text-sm text-ink-muted">{s.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-5xl px-5 pb-20 sm:px-8">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div class="space-y-4">
+        <p class="text-xs font-medium uppercase tracking-[0.16em] text-ink-subtle">
+          Cómo llega el paciente
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="mailto:hola@vieirarmiguel.com?subject=Consultorio"
-            class="inline-flex rounded-full bg-blue-600 text-white px-5 py-2.5 text-sm font-medium hover:bg-blue-700"
-          >
-            Escribir a hola@vieirarmiguel.com
-          </a>
-          <a
-            href="https://wa.me/5804241266496"
-            class="inline-flex rounded-full border border-zinc-300 px-5 py-2.5 text-sm font-medium hover:border-zinc-500"
-          >
-            WhatsApp
-          </a>
+        <h2 class="font-display text-3xl tracking-tight sm:text-4xl">
+          Un servicio. Un botón. Un chat.
+        </h2>
+        <p class="max-w-md text-ink-muted">
+          La página no pide un formulario. Abre WhatsApp con el servicio ya
+          escrito. El consultorio responde. El origen queda registrado.
+        </p>
+      </div>
+      <div class="mx-auto w-full max-w-sm">
+        <div class="rounded-xl border border-line bg-paper-elevated p-3">
+          <div id="demo-landing" class="rounded-lg bg-paper p-6">
+            <h3 class="font-display text-2xl leading-tight">Blanqueamiento dental</h3>
+            <p class="mt-2 text-sm text-ink-muted">
+              Evaluación en la primera visita. Respuesta el mismo día.
+            </p>
+            <button
+              id="demo-open"
+              type="button"
+              class="mt-6 flex min-h-11 w-full items-center justify-center rounded-md bg-forest px-4 py-3 text-sm font-medium text-forest-fg"
+            >
+              Escribir por WhatsApp
+            </button>
+          </div>
+          <div id="demo-chat" class="hidden min-h-[360px] flex-col rounded-lg bg-[#141210]">
+            <div class="flex items-center justify-between border-b border-white/10 px-4 py-3">
+              <p class="text-sm font-medium text-paper">WhatsApp</p>
+              <button id="demo-close" type="button" class="text-xs text-paper/70">
+                Volver
+              </button>
+            </div>
+            <div class="flex flex-1 flex-col gap-3 p-4">
+              <div class="ml-8 rounded-md bg-forest px-3 py-2 text-sm text-forest-fg">
+                Hola, vi la página. Quiero una cita para blanqueamiento esta semana.
+              </div>
+              <div class="mr-8 rounded-md bg-white/10 px-3 py-2 text-sm text-paper">
+                Con gusto. ¿Prefiere martes a las 10 o jueves a las 4?
+              </div>
+              <div class="ml-8 rounded-md bg-forest px-3 py-2 text-sm text-forest-fg">
+                Jueves a las 4. Gracias.
+              </div>
+            </div>
+          </div>
         </div>
-      </header>
+      </div>
+    </div>
+  </section>
 
-      <section>
-        <h2 class="text-xl font-semibold text-zinc-900">Qué entra</h2>
-        <ul class="mt-4 space-y-2 text-zinc-700 list-disc pl-5">
-          <li>Una landing: un servicio, una zona, un botón a WhatsApp</li>
-          <li>Google Business: categorías, horario, fotos, el mismo número</li>
-          <li>Mensaje de respuesta y 3 preguntas para calificar al que escribe</li>
-          <li>2 cambios al mes, en 48 horas hábiles</li>
-          <li>Alojamiento y que el sitio se mantenga al aire</li>
+  <section class="mx-auto max-w-5xl px-5 pb-20 sm:px-8">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-3xl">Entra</h2>
+        <ul class="mt-6 space-y-3">
+          {included.map((line) => (
+            <li class="flex gap-3 text-ink-muted">
+              <span class="mt-2 size-1.5 shrink-0 rounded-full bg-forest" />
+              {line}
+            </li>
+          ))}
         </ul>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-semibold text-zinc-900">Qué no entra</h2>
-        <ul class="mt-4 space-y-2 text-zinc-700 list-disc pl-5">
-          <li>Tienda, reservas online, blog, 8 páginas</li>
-          <li>Gestión de anuncios con mi tarjeta</li>
-          <li>CRM ni campañas de email</li>
+      </div>
+      <div>
+        <h2 class="font-display text-3xl">No entra</h2>
+        <ul class="mt-6 space-y-3">
+          {excluded.map((line) => (
+            <li class="flex gap-3 text-ink-muted">
+              <span class="mt-2 size-1.5 shrink-0 rounded-full bg-line-strong" />
+              {line}
+            </li>
+          ))}
         </ul>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section>
-        <h2 class="text-xl font-semibold text-zinc-900">Precio</h2>
-        <p class="mt-4 text-zinc-700">
-          Lista: <strong>497 USD</strong> de instalación + <strong>149 USD</strong> al mes (mínimo 3 meses).
-        </p>
-        <p class="mt-3 text-zinc-700">
-          Pilotos: quedan <strong>2 cupos</strong>. Instalación 297 USD + 3 meses a 99 USD adelantados (297 USD más).
-          Si a 30 días no hubo chats atribuibles al canal, se corta.
-        </p>
-        <p class="mt-3 text-sm text-zinc-500">Pago en USD por Payoneer o USDT.</p>
-      </section>
+  <section id="precio" class="border-y border-line bg-paper-elevated">
+    <div class="mx-auto max-w-5xl px-5 py-20 sm:px-8">
+      <h2 class="font-display text-3xl">Dos tarifas. Misma entrega.</h2>
+      <p class="mt-3 max-w-xl text-ink-muted">
+        El producto no cambia. Cambia el precio de entrada y las condiciones de salida.
+      </p>
+      <div class="mt-10 overflow-x-auto">
+        <table class="w-full min-w-[32rem] text-left text-sm">
+          <thead>
+            <tr class="border-b border-line text-ink-subtle">
+              <th class="py-3 pr-4 font-medium"></th>
+              <th class="py-3 pr-4 font-medium">Piloto</th>
+              <th class="py-3 font-medium">Lista</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-line">
+              <td class="py-3 pr-4 text-ink-muted">Cupos</td>
+              <td class="py-3 pr-4">2</td>
+              <td class="py-3">Sin límite promocional</td>
+            </tr>
+            <tr class="border-b border-line">
+              <td class="py-3 pr-4 text-ink-muted">Setup</td>
+              <td class="py-3 pr-4">297 USD</td>
+              <td class="py-3">497 USD</td>
+            </tr>
+            <tr class="border-b border-line">
+              <td class="py-3 pr-4 text-ink-muted">Mensual</td>
+              <td class="py-3 pr-4">99 USD × 3, adelantados</td>
+              <td class="py-3">149 USD, mínimo 3 meses</td>
+            </tr>
+            <tr class="border-b border-line">
+              <td class="py-3 pr-4 text-ink-muted">Total de entrada</td>
+              <td class="py-3 pr-4 font-medium">594 USD</td>
+              <td class="py-3 font-medium">497 + primer mes</td>
+            </tr>
+            <tr class="border-b border-line">
+              <td class="py-3 pr-4 text-ink-muted">Salida</td>
+              <td class="py-3 pr-4">A 30 días, si no hay chats del canal, se corta</td>
+              <td class="py-3">Al terminar el mínimo de 3 meses</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 text-ink-muted">Entrega</td>
+              <td class="py-3 pr-4">14 días. Mismo alcance.</td>
+              <td class="py-3">14 días. Mismo alcance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <a
+        href="mailto:hola@vieirarmiguel.com?subject=Piloto%20consultorio"
+        class="mt-10 inline-flex min-h-11 items-center rounded-md bg-forest px-5 py-3 text-sm font-medium text-forest-fg"
+      >
+        Pedir piloto
+      </a>
+    </div>
+  </section>
 
-      <section>
-        <h2 class="text-xl font-semibold text-zinc-900">Quién lo hace</h2>
-        <p class="mt-4 text-zinc-700">
-          Miguel Vieira. Trabajo en producto en Telefónica. Construyo y mantengo el canal.
-          Estoy en Caracas. El sitio y el dominio son de ustedes; yo opero el DNS y el hosting.
-        </p>
-      </section>
-    </article>
-  </main>
+  <section class="mx-auto max-w-5xl px-5 py-20 sm:px-8">
+    <h2 class="font-display text-3xl">14 días</h2>
+    <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        steps.map((s) => (
+          <li class="rounded-lg border border-line bg-paper-elevated p-4">
+            <p class="text-xs font-medium uppercase tracking-[0.14em] text-ink-subtle">{s.day}</p>
+            <p class="mt-2 font-medium">{s.title}</p>
+            <p class="mt-2 text-sm text-ink-muted">{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="border-y border-line bg-paper-elevated">
+    <div class="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+      <h2 class="font-display text-3xl">Pago</h2>
+      <p class="mt-3 max-w-xl text-ink-muted">Adelantado. En dólares. Antes de empezar el intake.</p>
+      <div class="mt-8 grid gap-6 sm:grid-cols-3">
+        <div>
+          <p class="font-medium">Payoneer</p>
+          <p class="text-sm text-ink-muted">Transferencia en USD</p>
+        </div>
+        <div>
+          <p class="font-medium">USDT</p>
+          <p class="text-sm text-ink-muted">Binance, red acordada</p>
+        </div>
+        <div>
+          <p class="font-medium">Cuándo</p>
+          <p class="text-sm text-ink-muted">Setup antes del día 0</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-5 py-20 sm:px-8">
+    <h2 class="font-display text-3xl">Preguntas</h2>
+    <div class="mt-8 divide-y divide-line border-y border-line">
+      {
+        faqs.map((f) => (
+          <details class="py-5">
+            <summary class="cursor-pointer list-none font-medium">{f.q}</summary>
+            <p class="mt-3 text-sm text-ink-muted">{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+    <a
+      href="mailto:hola@vieirarmiguel.com?subject=Consultorio"
+      class="mt-10 inline-flex min-h-11 items-center rounded-md bg-forest px-5 py-3 text-sm font-medium text-forest-fg"
+    >
+      Escribir
+    </a>
+  </section>
 </Layout>
+
+<script>
+  const openBtn = document.getElementById("demo-open")
+  const closeBtn = document.getElementById("demo-close")
+  const landing = document.getElementById("demo-landing")
+  const chat = document.getElementById("demo-chat")
+  openBtn?.addEventListener("click", () => {
+    landing?.classList.add("hidden")
+    chat?.classList.remove("hidden")
+    chat?.classList.add("flex")
+  })
+  closeBtn?.addEventListener("click", () => {
+    chat?.classList.add("hidden")
+    chat?.classList.remove("flex")
+    landing?.classList.remove("hidden")
+  })
+</script>
